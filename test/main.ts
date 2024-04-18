@@ -1,13 +1,18 @@
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
-import { createApp, h, ref, watchEffect } from 'vue'
+import { createApp, h, ref, watchEffect, computed, watch } from 'vue'
 import { type OutputModes, Repl, useStore, useVueImportMap } from '../src'
+import { useDarkMode } from '../src/composables/useDarkMode'
 // @ts-ignore
 import MonacoEditor from '../src/editor/MonacoEditor.vue'
 // @ts-ignore
 import CodeMirrorEditor from '../src/editor/CodeMirrorEditor.vue'
 
+import '../src/tailwind.css'
+
 const window = globalThis.window as any
 window.process = { env: {} }
+
+const { darkMode } = useDarkMode()
 
 const App = {
   setup() {
@@ -51,6 +56,10 @@ const App = {
     window.theme = theme
     const previewTheme = ref(false)
     window.previewTheme = previewTheme
+
+    watch(darkMode, (darkMode) => {
+      theme.value = darkMode
+    })
 
     return () =>
       h(Repl, {

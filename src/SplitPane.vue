@@ -82,7 +82,7 @@ function dragEnd() {
 <style scoped>
 .split-pane {
   display: flex;
-  height: 100%;
+  height: calc(100% - 50px);
   position: relative;
 }
 .split-pane.dragging {

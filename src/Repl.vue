@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Navigator from './Navigator.vue'
 import SplitPane from './SplitPane.vue'
 import Output from './output/Output.vue'
 import { type Store, useStore } from './store'
@@ -84,6 +85,7 @@ defineExpose({ reload })
 
 <template>
   <div class="vue-repl">
+    <Navigator />
     <SplitPane :layout="layout">
       <template #[editorSlotName]>
         <EditorContainer :editor-component="editor" />
